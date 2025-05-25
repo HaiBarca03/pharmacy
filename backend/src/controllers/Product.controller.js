@@ -89,10 +89,21 @@ const getProductsByCategoryId = async (req, res) => {
   }
 }
 
+const getProductById = async (req, res) => {
+  try {
+    const id = req.params.id
+    const product = await productService.getProductById(id)
+    res.status(200).json(product)
+  } catch (err) {
+    res.status(404).json({ error: err.message })
+  }
+}
+
 module.exports = {
   createProduct,
   getAllProducts,
   updateProduct,
   deleteProduct,
-  getProductsByCategoryId
+  getProductsByCategoryId,
+  getProductById
 }

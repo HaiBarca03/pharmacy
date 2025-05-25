@@ -1,0 +1,110 @@
+/* Container Styles */
+.category-icons-container {
+  /* background-color: #003087; */
+  padding: 16px 0;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  width: 100%;
+}
+
+/* Button Styles */
+.category-button {
+  background-color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 8px;
+  width: 90px;
+  height: 90px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #003087;
+  font-size: 12px;
+  font-weight: 500;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  overflow: hidden;
+  white-space: normal;
+  text-overflow: ellipsis;
+}
+
+.category-button:hover {
+  background-color: #e6f0fa;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.category-button .anticon {
+  font-size: 24px;
+  color: #00a650;
+  margin-bottom: 6px;
+  transition: color 0.3s ease;
+}
+
+.category-button:hover .anticon {
+  color: #008040;
+}
+
+/* Hot Button Styles */
+.hot-button {
+  position: relative;
+}
+
+.hot-button::after {
+  content: 'HOT';
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: #ff4d4f;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 6px;
+  border-radius: 8px;
+  z-index: 1;
+  text-transform: uppercase;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .category-icons-container {
+    padding: 12px 0;
+    gap: 10px;
+  }
+
+  .category-button {
+    width: 80px;
+    height: 80px;
+    padding: 10px 6px;
+    font-size: 11px;
+  }
+
+  .category-button .anticon {
+    font-size: 20px;
+    margin-bottom: 4px;
+  }
+
+  .hot-button::after {
+    top: -6px;
+    right: -6px;
+    font-size: 10px;
+    padding: 2px 5px;
+  }
+}
+
+@media (max-width: 480px) {
+  .category-button {
+    width: 70px;
+    height: 70px;
+    font-size: 10px;
+  }
+
+  .category-button .anticon {
+    font-size: 18px;
+  }
+}

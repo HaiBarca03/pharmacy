@@ -5,12 +5,14 @@ const {
   getAllProducts,
   updateProduct,
   deleteProduct,
-  getProductsByCategoryId
+  getProductsByCategoryId,
+  getProductById
 } = require('../controllers/Product.controller')
 const { authorizeAdmin } = require('../middlewares/auth')
 
 router.post('/', authorizeAdmin, createProduct)
 router.get('/category/:categoryId', getProductsByCategoryId)
+router.get('/:id', getProductById)
 router.get('/', getAllProducts)
 router.put('/:id', authorizeAdmin, updateProduct)
 router.delete('/:id', authorizeAdmin, deleteProduct)

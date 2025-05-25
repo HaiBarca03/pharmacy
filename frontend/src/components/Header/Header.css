@@ -1,0 +1,113 @@
+.logo-image {
+  height: 40px;
+  vertical-align: middle;
+}
+
+.header-container {
+  background-color: #003087;
+  color: #fff;
+  width: 100%;
+}
+
+.header-row {
+  padding: 10px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.search-bar {
+  width: 100%;
+  border-radius: 20px;
+  padding: 5px 10px;
+}
+
+.search-bar .ant-input {
+  background-color: #fff;
+  border: none;
+  height: 40px;
+}
+
+.search-bar .ant-input-prefix {
+  color: #003087;
+}
+
+.header-actions {
+  text-align: right;
+}
+
+.icon-button {
+  background-color: transparent;
+  border: none;
+  color: #fff;
+  font-size: 18px;
+}
+.login-button {
+  background-color: #fff;
+  border-color: #fff;
+  color: #000;
+  border-radius: 20px;
+  padding: 5px 15px;
+}
+
+.hotline-button {
+  background-color: #ff6200;
+  border-color: #ff6200;
+  color: #fff;
+  border-radius: 20px;
+  padding: 5px 15px;
+}
+
+.hotline-button:hover {
+  background-color: #e65c00;
+  border-color: #e65c00;
+}
+
+.nav-row {
+  /* background-color: #fff; */
+  padding: 10px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.nav-links .ant-btn {
+  color: #fff;
+  padding: 0;
+}
+
+.nav-links .ant-btn:hover {
+  color: #00a650;
+}
+
+.chat-button {
+  color: #ff6200 !important;
+}
+
+.chat-button:hover {
+  color: #e65c00 !important;
+}
+
+.category-scroll {
+  display: flex;
+  overflow-x: auto;
+  gap: 16px;
+  padding: 4px 0;
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on mobile */
+}
+
+.category-scroll::-webkit-scrollbar {
+  height: 8px;
+}
+
+.category-scroll::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.category-scroll::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.category-scroll::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

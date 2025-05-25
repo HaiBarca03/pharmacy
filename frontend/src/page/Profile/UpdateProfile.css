@@ -1,0 +1,59 @@
+.update-profile-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.update-profile-card {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+.update-profile-card .ant-card-head {
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.update-profile-card .ant-card-body {
+  padding: 24px;
+}
+
+.update-profile-form .ant-typography {
+  color: #333;
+}
+
+.update-profile-form .ant-form-item-label > label {
+  font-weight: 600;
+  color: #555;
+}
+
+.update-profile-form .ant-input,
+.update-profile-form .ant-select-selector,
+.update-profile-form .ant-picker {
+  border-radius: 4px;
+}
+
+.form-buttons {
+  display: flex;
+  gap: 16px;
+}
+
+.submit-button.ant-btn-primary {
+  background-color: #1890ff;
+  border-color: #1890ff;
+}
+
+.submit-button.ant-btn-primary:hover {
+  background-color: #40a9ff;
+  border-color: #40a9ff;
+}
+
+.cancel-button {
+  background-color: #f5f5f5;
+  border-color: #d9d9d9;
+}
+
+.cancel-button:hover {
+  background-color: #e6e6e6;
+  border-color: #bfbfbf;
+}

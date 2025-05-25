@@ -9,7 +9,8 @@ import {
   getRequest,
   getSuccess,
   postDone,
-  updateSuccess
+  updateSuccess,
+  getProfile
 } from './userSlice'
 import { getAuthConfig } from '../authConfig'
 
@@ -92,4 +93,41 @@ const registerUser = (data) => async (dispatch) => {
   }
 }
 
-export { loginUser, registerUser }
+const getUserProfile = () => async (dispatch) => {
+  dispatch(getRequest())
+
+  try {
+    const config = getAuthConfig()
+    const result = await axios.get(`/user/my-account`, config)
+
+    if (result.data.message) {
+      dispatch(getFailed(result.data.message))
+      throw new Error(result.data.message)
+    }
+
+    dispatch(getProfile(result.data))
+  } catch (error) {
+    const errorMessage =
+      error.response?.data?.message || 'Search failed. Please try again.'
+    dispatch(getFailed(errorMessage))
+    console.error('Search user error:', errorMessage)
+    throw error
+  }
+}
+
+const updateUser = (id, userData) => async (dispatch) => {
+  dispatch(getRequest())
+  try {
+    const config = getAuthConfig()
+    const res = await axios.put(`/user/${id}`, userData, config)
+    if (res.data.message) {
+      dispatch(getFailed(res.data.message))
+    } else {
+      dispatch(updateSuccess(res.data))
+    }
+  } catch (error) {
+    dispatch(getError(error.message))
+  }
+}
+
+export { loginUser, registerUser, getUserProfile, updateUser }

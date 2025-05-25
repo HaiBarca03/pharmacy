@@ -1,0 +1,259 @@
+/* General Layout */
+.medication-details-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
+}
+
+.medication-details-card {
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background: #fff;
+}
+
+/* Product Info and Layout */
+.product-layout {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  margin-top: 20px;
+  padding-bottom: 30px;
+}
+
+.product-info {
+  color: #666;
+  display: block;
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+
+/* Image Section */
+.medication-image {
+  flex-shrink: 0;
+}
+
+.medication-image .ant-image-img {
+  width: 350px;
+  height: 350px;
+  object-fit: contain;
+}
+
+.thumbnail-container {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.thumbnail-container .ant-image {
+  cursor: pointer;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  transition: border 0.3s ease;
+}
+
+.thumbnail-container .ant-image-img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+}
+
+.thumbnail-container .ant-image:hover,
+.thumbnail-container .ant-image.active {
+  border: 2px solid #1890ff;
+}
+.product-des {
+  padding: 20px 0;
+  border-top: #333 solid 1px;
+}
+
+/* Product Details Section */
+.product-details {
+  flex: 1;
+  padding: 20px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.detail-card {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.detail-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  /* background: #f9f9f9; */
+  border-radius: 6px;
+  transition: background 0.3s ease;
+}
+.name-label {
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+}
+.detail-item:hover {
+  background: #f0f0f0;
+}
+
+.detail-label {
+  font-weight: 600;
+  color: #333;
+  min-width: 120px;
+}
+
+.detail-value {
+  color: #555;
+  font-size: 16px;
+}
+
+.price-highlight {
+  color: #1890ff;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.prescription-required {
+  color: #ff4d4f;
+  font-weight: 600;
+}
+
+.prescription-not-required {
+  color: #52c41a;
+  font-weight: 600;
+}
+
+/* Action Section */
+.action-section {
+  flex: 0 0 300px;
+  padding: 20px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.quantity-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.quantity-label {
+  margin-right: 10px;
+  font-weight: bold;
+  color: #333;
+}
+
+.quantity-btn {
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  transition: border-color 0.3s ease;
+}
+
+.quantity-btn:hover {
+  border-color: #40a9ff;
+}
+
+.quantity-input {
+  width: 60px;
+  text-align: center;
+}
+
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.buy-now-btn,
+.add-to-cart-btn {
+  width: 100%;
+  height: 40px;
+  border-radius: 4px;
+}
+
+.buy-now-btn {
+  background-color: #1890ff;
+  border-color: #1890ff;
+}
+
+.buy-now-btn:hover,
+.buy-now-btn:focus {
+  background-color: #40a9ff;
+  border-color: #40a9ff;
+}
+
+.add-to-cart-btn {
+  border-color: #d9d9d9;
+  background-color: #fff;
+}
+
+.add-to-cart-btn:hover,
+.add-to-cart-btn:focus {
+  border-color: #40a9ff;
+  color: #40a9ff;
+}
+
+/* Icon Row (Commented Out) */
+.icon-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.icon-item {
+  display: flex;
+  align-items: center;
+}
+
+.icon-item img {
+  margin-right: 6px;
+  width: 24px;
+  height: 24px;
+}
+
+.icon-text {
+  color: #666;
+  font-size: 14px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .product-layout {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .medication-image {
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
+
+  .action-section {
+    width: 100%;
+    flex: none;
+  }
+
+  .detail-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+
+  .detail-label {
+    min-width: auto;
+  }
+}

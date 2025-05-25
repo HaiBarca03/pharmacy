@@ -1,5 +1,5 @@
 const { Op } = require('sequelize')
-const { Product } = require('../entities')
+const { Product, Category } = require('../entities')
 
 const createProduct = async (data) => {
   const requiredFields = ['name', 'price', 'category_id']
@@ -24,7 +24,7 @@ const createProduct = async (data) => {
 const getAllProducts = async (filters = {}) => {
   const {
     page = 1,
-    limit = 10,
+    limit = 12,
     priceMin,
     priceMax,
     manufacturer,
@@ -145,10 +145,24 @@ const getProductsByCategoryId = async (
   }
 }
 
+const getProductById = async (id) => {
+  const product = await Product.findByPk(id, {
+    include: {
+      model: Category,
+      attributes: ['id', 'name']
+    }
+  })
+  if (!product) {
+    throw new Error('Product not found')
+  }
+  return product.toJSON()
+}
+
 module.exports = {
   createProduct,
   getAllProducts,
   updateProduct,
   deleteProduct,
-  getProductsByCategoryId
+  getProductsByCategoryId,
+  getProductById
 }

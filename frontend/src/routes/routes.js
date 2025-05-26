@@ -1,5 +1,7 @@
 import MedicationDetails from '../components/MedicationDetails/MedicationDetails'
+import ArticleHomePage from '../page/Article/ArticleHomePage'
 import ProductCategory from '../page/Category/ProductCategory'
+import HealthConsultationHomePage from '../page/HealthConsultation/HealthConsultationHomePage'
 import HomePage from '../page/HomePage/HomePage'
 import Login from '../page/Login/Login'
 import NotFoundPage from '../page/NotPoundPage/NotPoundPage'
@@ -46,6 +48,16 @@ export const routes = [
   {
     path: '/product/:id',
     page: MedicationDetails,
+    isShowHeader: true
+  },
+  {
+    path: '/article',
+    page: ArticleHomePage,
+    isShowHeader: true
+  },
+  {
+    path: '/health-consultation',
+    page: HealthConsultationHomePage,
     isShowHeader: true
   },
   {

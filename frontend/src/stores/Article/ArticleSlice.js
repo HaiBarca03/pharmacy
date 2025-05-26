@@ -1,35 +1,28 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-  HealthConsultationsList: [],
-  HealthConsultationDetail: {},
-  MyHealthConsultation: [],
+  articleList: [],
+  articleDetail: {},
   loading: false,
   error: null,
   response: null
 }
 
-const HealthConsultationSlice = createSlice({
-  name: 'HealthConsultation',
+const articleSlice = createSlice({
+  name: 'Article',
   initialState,
   reducers: {
     getRequest: (state) => {
       state.loading = true
     },
     doneSuccess: (state, action) => {
-      state.HealthConsultationDetail = action.payload
+      state.articleDetail = action.payload
       state.loading = false
       state.error = null
       state.response = null
     },
     getSuccess: (state, action) => {
-      state.HealthConsultationsList = action.payload
-      state.loading = false
-      state.error = null
-      state.response = null
-    },
-    getMyHelth: (state, action) => {
-      state.MyHealthConsultation = action.payload
+      state.articleList = action.payload
       state.loading = false
       state.error = null
       state.response = null
@@ -49,7 +42,7 @@ const HealthConsultationSlice = createSlice({
       state.response = null
     },
     deleteSuccess: (state, action) => {
-      state.HealthConsultationsList = state.HealthConsultationsList.filter(
+      state.articleList = state.articleList.filter(
         (item) => item.user_id !== action.payload
       )
       state.loading = false
@@ -57,27 +50,24 @@ const HealthConsultationSlice = createSlice({
       state.response = 'Deleted successfully'
     },
     createSuccess: (state, action) => {
-      if (!Array.isArray(state.HealthConsultationsList)) {
-        state.HealthConsultationsList = []
+      if (!Array.isArray(state.articleList)) {
+        state.articleList = []
       }
-      state.HealthConsultationsList.push(action.payload)
+      state.articleList.push(action.payload)
       state.loading = false
       state.error = null
       state.response = 'Created successfully'
     },
     updateSuccess: (state, action) => {
-      if (Array.isArray(state.HealthConsultationsList)) {
-        const index = state.HealthConsultationsList.findIndex(
+      if (Array.isArray(state.articleList)) {
+        const index = state.articleList.findIndex(
           (item) => item.user_id === action.payload.user_id
         )
         if (index !== -1) {
-          state.HealthConsultationsList[index] = action.payload
+          state.articleList[index] = action.payload
         }
       } else {
-        console.warn(
-          'HealthConsultationsList is not an array!',
-          state.HealthConsultationsList
-        )
+        console.warn('articleList is not an array!', state.articleList)
       }
 
       state.loading = false
@@ -96,8 +86,7 @@ export const {
   postDone,
   deleteSuccess,
   createSuccess,
-  updateSuccess,
-  getMyHelth
-} = HealthConsultationSlice.actions
+  updateSuccess
+} = articleSlice.actions
 
-export const HealthConsultationReducer = HealthConsultationSlice.reducer
+export const articleReducer = articleSlice.reducer

@@ -9,7 +9,8 @@ import {
   getRequest,
   getSuccess,
   postDone,
-  updateSuccess
+  updateSuccess,
+  getMyHelth
 } from './HealthConsultationSlice'
 import { getAuthConfig } from '../authConfig'
 
@@ -37,6 +38,21 @@ export const getHealthConsultation = () => async (dispatch) => {
       dispatch(getFailed(res.data.message))
     } else {
       dispatch(getSuccess(res.data))
+    }
+  } catch (error) {
+    dispatch(getError(error.message))
+  }
+}
+
+export const getMyHealthConsultation = () => async (dispatch) => {
+  dispatch(getRequest())
+  try {
+    const config = getAuthConfig()
+    const res = await axios.get('/health-consultation/my-account', config)
+    if (res.data.message) {
+      dispatch(getFailed(res.data.message))
+    } else {
+      dispatch(getMyHelth(res.data))
     }
   } catch (error) {
     dispatch(getError(error.message))

@@ -1,0 +1,27 @@
+.article-home-container {
+  padding: 24px;
+  background-color: #f0f2f5;
+  min-height: 100vh;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.create-article-card {
+  background-color: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.article-list {
+  padding: 0 12px;
+}
+
+.article-card {
+  margin-bottom: 16px;
+  transition: all 0.3s ease;
+}
+
+.article-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}

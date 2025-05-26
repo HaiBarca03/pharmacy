@@ -1,0 +1,14 @@
+.card-title-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.health-form-card {
+  margin-bottom: 16px;
+}
+
+.health-list-card {
+  max-height: 600px;
+  overflow-y: auto;
+}

@@ -15,17 +15,33 @@ import {
   SmileOutlined
 } from '@ant-design/icons'
 import './QuickSession.css'
+import { useNavigate } from 'react-router-dom'
 
 const QuickSession = () => {
+  const navigate = useNavigate()
+  const handleArticles = () => {
+    navigate('/article')
+  }
+  const handleHelthConsultation = () => {
+    navigate('/health-consultation')
+  }
   return (
     <Space size="large" wrap>
-      <Button className="category-button" icon={<QuestionCircleOutlined />}>
+      <Button
+        className="category-button"
+        icon={<QuestionCircleOutlined />}
+        onClick={handleHelthConsultation}
+      >
         Tư vấn
       </Button>
       <Button className="category-button" icon={<MedicineBoxOutlined />}>
         Danh mục
       </Button>
-      <Button className="category-button" icon={<TagOutlined />}>
+      <Button
+        className="category-button"
+        icon={<TagOutlined />}
+        onClick={handleArticles}
+      >
         Bài viết
       </Button>
       <Button className="category-button" icon={<TeamOutlined />}>

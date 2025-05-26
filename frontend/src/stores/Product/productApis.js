@@ -14,7 +14,7 @@ import {
 import { getAuthConfig } from '../authConfig'
 
 export const getAllProducts =
-  (page = 1, limit = 10) =>
+  (page = 1, limit = 12) =>
   async (dispatch) => {
     dispatch(getRequest())
     try {
@@ -58,6 +58,42 @@ export const createProduct = (newProduct) => async (dispatch) => {
     } else {
       dispatch(createSuccess(res.data))
       message.success('Tạo sản phẩm thành công!')
+    }
+  } catch (error) {
+    dispatch(getError(error.message))
+  }
+}
+
+export const updateProduct = (updatedProduct) => async (dispatch) => {
+  dispatch(getRequest())
+  try {
+    const config = getAuthConfig()
+    const res = await axios.put(
+      `/product/${updatedProduct.id}`,
+      updatedProduct,
+      config
+    )
+    if (res.data.message) {
+      dispatch(getFailed(res.data.message))
+    } else {
+      dispatch(updateSuccess(res.data))
+      message.success('Cập nhật sản phẩm thành công!')
+    }
+  } catch (error) {
+    dispatch(getError(error.message))
+  }
+}
+
+export const deleteProduct = (id) => async (dispatch) => {
+  dispatch(getRequest())
+  try {
+    const config = getAuthConfig()
+    const res = await axios.delete(`/product/${id}`, config)
+    if (res.data.message) {
+      dispatch(getFailed(res.data.message))
+    } else {
+      dispatch(deleteSuccess(id))
+      message.success('Xóa sản phẩm thành công!')
     }
   } catch (error) {
     dispatch(getError(error.message))

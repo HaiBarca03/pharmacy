@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import { Table, Space, Button, Image, Tag, Modal } from 'antd'
+import { Table, Space, Button, Image, Tag, Modal, Popconfirm } from 'antd'
 import { EyeOutlined, DeleteOutlined, PlusOutlined } from '@ant-design/icons'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   createProduct,
-  getAllProducts
+  deleteProduct,
+  getAllProducts,
+  updateProduct
 } from '../../../stores/Product/productApis'
 import CreateProductModal from './CreateProduct'
+import UpdateProduct from './UpdateProduct'
 
 const AdminProduct = () => {
   const [viewModalVisible, setViewModalVisible] = useState(false)
@@ -19,6 +22,7 @@ const AdminProduct = () => {
   const [loading, setLoading] = useState(true)
   const [page, setPage] = useState(1)
   const [pageSize, setPageSize] = useState(10)
+  const [updateModalVisible, setUpdateModalVisible] = useState(false)
 
   useEffect(() => {
     dispatch(getAllProducts(page, pageSize))
@@ -40,28 +44,31 @@ const AdminProduct = () => {
     setSelectedProduct(null)
   }
 
-  const handleDelete = (id) => {
-    Modal.confirm({
-      title: 'Xác nhận xoá',
-      content: 'Bạn có chắc muốn xoá sản phẩm này?',
-      okText: 'Xoá',
-      cancelText: 'Huỷ',
-      okType: 'danger',
-      onOk: () => {
-        // Gọi API xoá
-        console.log('Xoá sản phẩm:', id)
-      }
-    })
+  const handleDelete = async (id) => {
+    try {
+      await dispatch(deleteProduct(id))
+      message.success('Xoá thành công')
+      dispatch(getAllProducts())
+    } catch (error) {
+      message.error('Xoá thất bại')
+    }
   }
 
   const handleCreate = (newProduct) => {
     console.log('Tạo sản phẩm mới:', newProduct)
-    // newProduct.image_url và active_ingredients đã là mảng rồi
-
     dispatch(createProduct(newProduct))
     setCreateModalVisible(false)
-    // Lấy lại danh sách sản phẩm nếu cần
     dispatch(getAllProducts())
+  }
+  const handleUpdate = (product) => {
+    setSelectedProduct(product)
+    setUpdateModalVisible(true)
+  }
+
+  const handleUpdateSubmit = (updatedProduct) => {
+    dispatch(updateProduct(updatedProduct))
+    setUpdateModalVisible(false)
+    dispatch(getAllProducts(page, pageSize))
   }
 
   const columns = [
@@ -120,13 +127,23 @@ const AdminProduct = () => {
             Xem
           </Button>
           <Button
-            danger
-            icon={<DeleteOutlined />}
+            type="default"
             size="small"
-            onClick={() => handleDelete(record.id)}
+            onClick={() => handleUpdate(record)}
           >
-            Xoá
+            Sửa
           </Button>
+
+          <Popconfirm
+            title="Bạn có chắc chắn muốn xoá?"
+            onConfirm={() => handleDelete(record.id)}
+            okText="Xoá"
+            cancelText="Huỷ"
+          >
+            <Button danger icon={<DeleteOutlined />}>
+              Xoá
+            </Button>
+          </Popconfirm>
         </Space>
       )
     }
@@ -200,6 +217,12 @@ const AdminProduct = () => {
         visible={createModalVisible}
         onCreate={handleCreate}
         onCancel={() => setCreateModalVisible(false)}
+      />
+      <UpdateProduct
+        visible={updateModalVisible}
+        onUpdate={handleUpdateSubmit}
+        onCancel={() => setUpdateModalVisible(false)}
+        product={selectedProduct}
       />
     </div>
   )

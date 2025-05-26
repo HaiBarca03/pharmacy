@@ -10,6 +10,7 @@ import NotFoundPage from '../page/NotPoundPage/NotPoundPage'
 import Profile from '../page/Profile/Profile'
 import UpdateProfile from '../page/Profile/UpdateProfile'
 import RegisterPage from '../page/Register/RegisterPage'
+import Unauthorized from '../page/Unauthorized/Unauthorized'
 
 export const routes = [
   {
@@ -20,7 +21,8 @@ export const routes = [
   {
     path: '/admin',
     page: AdminPageHome,
-    isShowHeader: false
+    isShowHeader: false,
+    isPrivate: true
   },
   {
     path: '/login',
@@ -66,6 +68,10 @@ export const routes = [
     path: '/admin/category',
     page: AdminCategory
     // isShowHeader: true
+  },
+  {
+    path: '/unauthorized',
+    page: Unauthorized
   },
   {
     path: '*',

@@ -1,10 +1,14 @@
 import React, { useState } from 'react'
-import { Modal, Form, Input, InputNumber, Switch } from 'antd'
+import { Modal, Form, Input, InputNumber, Switch, Select } from 'antd'
 import './CreateProduct.css'
+import { useDispatch, useSelector } from 'react-redux'
 
 const CreateProductModal = ({ visible, onCreate, onCancel }) => {
   const [form] = Form.useForm()
-
+  const dispatch = useDispatch()
+  const listCaegories = useSelector(
+    (state) => state.category.CategoriesList || []
+  )
   const handleOk = () => {
     form
       .validateFields()
@@ -69,11 +73,22 @@ const CreateProductModal = ({ visible, onCreate, onCancel }) => {
         </Form.Item>
         <Form.Item
           name="category_id"
-          label="Mã danh mục"
-          rules={[{ required: true }]}
+          label="Danh mục sản phẩm"
+          rules={[{ required: true, message: 'Vui lòng chọn danh mục' }]}
           className="form-item"
         >
-          <Input className="input" />
+          <Select
+            placeholder="Chọn danh mục"
+            className="input"
+            showSearch
+            optionFilterProp="children"
+          >
+            {listCaegories.map((cat) => (
+              <Select.Option key={cat.id} value={cat.id}>
+                {cat.name}
+              </Select.Option>
+            ))}
+          </Select>
         </Form.Item>
         <Form.Item
           name="image_url"

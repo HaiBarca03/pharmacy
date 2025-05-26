@@ -3,26 +3,23 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
-  Navigate,
-  useNavigate
+  Navigate
 } from 'react-router-dom'
 import Default from './components/Default/Default'
 import { routes } from './routes/routes'
+import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute'
 
 function App() {
-  const [user, setUser] = useState({ isAdmin: false })
-
-  useEffect(() => {
-    const storedUser = localStorage.getItem('user')
-    if (storedUser) {
-      try {
-        const parsedUser = JSON.parse(storedUser)
-        setUser(parsedUser)
-      } catch (error) {
-        console.error('Lỗi khi parse user từ localStorage:', error)
-      }
+  const [isAdmin, setIsAdmin] = useState(() => {
+    try {
+      const storedUser = localStorage.getItem('user')
+      const parsedUser = JSON.parse(storedUser)
+      return parsedUser?.isAdmin === true
+    } catch (error) {
+      console.error('Lỗi khi parse user:', error)
+      return false
     }
-  }, [])
+  })
 
   return (
     <Router>
@@ -31,17 +28,23 @@ function App() {
           {routes.map(({ path, page: Page, isPrivate, isShowHeader }, idx) => {
             const Layout = isShowHeader ? Default : Fragment
 
+            const element = (
+              <Layout>
+                <Page />
+              </Layout>
+            )
+
             return (
               <Route
                 key={idx}
                 path={path}
                 element={
-                  isPrivate && !user.isAdmin ? (
-                    <Navigate to="/unauthorized" replace />
+                  isPrivate ? (
+                    <ProtectedRoute isAllowed={isAdmin}>
+                      {element}
+                    </ProtectedRoute>
                   ) : (
-                    <Layout>
-                      <Page />
-                    </Layout>
+                    element
                   )
                 }
               />

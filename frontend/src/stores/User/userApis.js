@@ -31,19 +31,18 @@ const loginUser = (data) => async (dispatch) => {
 
     dispatch(postDone())
 
-    if (result.data.token) {
-      localStorage.setItem('user', JSON.stringify(result.data.user))
-      localStorage.setItem('token', result.data.token)
-    } else {
-      console.warn('Token not found in API response')
-    }
+    if (result.data && result.data.token && result.data.user) {
+      const userData = {
+        ...result.data.user,
+        isAdmin: result.data.user.role === 'admin'
+      }
 
-    if (result.data) {
-      localStorage.setItem('user', JSON.stringify(result.data))
+      localStorage.setItem('user', JSON.stringify(userData))
       localStorage.setItem('token', result.data.token)
-      dispatch(doneSuccess(result.data))
+
+      dispatch(doneSuccess(userData))
     } else {
-      console.warn('User not found in API response')
+      console.warn('User or token missing in response')
     }
   } catch (error) {
     const errorMessage =
@@ -130,4 +129,49 @@ const updateUser = (id, userData) => async (dispatch) => {
   }
 }
 
-export { loginUser, registerUser, getUserProfile, updateUser }
+const getAllUser = () => async (dispatch) => {
+  dispatch(getRequest())
+  try {
+    const config = getAuthConfig()
+    const res = await axios.get('/user/get-all-user')
+    if (res.data.message) {
+      dispatch(getFailed(res.data.message))
+    } else {
+      dispatch(getSuccess(res.data))
+    }
+  } catch (error) {
+    dispatch(getError(error.message))
+  }
+}
+
+const deleteUsers = (userIds) => async (dispatch) => {
+  dispatch(getRequest())
+  try {
+    const config = {
+      ...getAuthConfig(),
+      data: { user_ids: userIds } // đây là phần quan trọng
+    }
+
+    const res = await axios.delete('/user', config)
+
+    if (res.data.error) {
+      dispatch(getFailed(res.data.error))
+      message.error(res.data.error)
+    } else {
+      dispatch(deleteSuccess(userIds))
+      message.success(res.data.message)
+    }
+  } catch (error) {
+    dispatch(getError(error.message))
+    message.error('Failed to delete users')
+  }
+}
+
+export {
+  loginUser,
+  registerUser,
+  getUserProfile,
+  updateUser,
+  getAllUser,
+  deleteUsers
+}

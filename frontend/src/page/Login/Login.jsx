@@ -19,7 +19,15 @@ const Login = () => {
     try {
       await dispatch(loginUser(values))
       message.success('Đăng nhập thành công!')
-      navigate('/')
+      const storedUser = localStorage.getItem('user')
+      const parsedUser = JSON.parse(storedUser)
+      if (parsedUser.isAdmin === true || parsedUser.role === 'admin') {
+        setTimeout(() => {
+          navigate('/admin')
+        }, 100)
+      } else {
+        navigate('/')
+      }
     } catch (error) {
       message.error(error.message || 'Đăng nhập thất bại')
     }

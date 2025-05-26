@@ -98,27 +98,28 @@ const Header = () => {
               <Button icon={<BellOutlined />} className="icon-button" />
               <Button icon={<ShoppingCartOutlined />} className="icon-button" />
               {user ? (
-                <Space>
-                  <img
-                    src={
-                      user.avatar ||
-                      'https://e7.pngegg.com/pngimages/297/49/png-clipart-pharmacy-symbol-aboriginal-text-logo-thumbnail.png'
-                    }
-                    alt="avatar"
-                    className="user-avatar"
-                    onClick={handleProfile}
-                  />
-                  <span className="user-name">{user.name}</span>
+                <div className="user-info">
+                  <div className="avatar-wrapper" onClick={handleProfile}>
+                    <img
+                      src={
+                        user.avatar ||
+                        'https://e7.pngegg.com/pngimages/297/49/png-clipart-pharmacy-symbol-aboriginal-text-logo-thumbnail.png'
+                      }
+                      alt="avatar"
+                      className="user-avatar"
+                    />
+                    <span className="user-name">{user.name}</span>
+                  </div>
                   <Button
                     icon={<LogoutOutlined />}
                     className="icon-button"
                     onClick={handleLogout}
                   />
-                </Space>
+                </div>
               ) : (
-                <Button className="login-button" onClick={handleLogin}>
+                <button className="login-button-btn" onClick={handleLogin}>
                   <UserOutlined /> Đăng nhập/Đăng ký
-                </Button>
+                </button>
               )}
             </Space>
           </div>

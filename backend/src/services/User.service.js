@@ -90,7 +90,15 @@ const updateUser = async (user_id, data) => {
   const user = await User.findByPk(user_id)
   if (!user) throw new Error('User not found')
 
-  const updatableFields = ['name', 'phone', 'address', 'gender', 'dob', 'email']
+  const updatableFields = [
+    'name',
+    'role',
+    'phone',
+    'address',
+    'gender',
+    'dob',
+    'email'
+  ]
   updatableFields.forEach((field) => {
     if (data[field] !== undefined) {
       user[field] = data[field]

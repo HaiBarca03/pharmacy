@@ -1,0 +1,12 @@
+.admin-category-container {
+  padding: 20px;
+  background: #fff;
+  border-radius: 10px;
+}
+
+.admin-category-container .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}

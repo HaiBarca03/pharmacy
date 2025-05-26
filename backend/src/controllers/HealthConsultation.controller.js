@@ -74,7 +74,7 @@ const deleteHealthConsultation = async (req, res) => {
       id
     )
     const author_id = checkAns.user_id
-    if (author_id !== req.user.user_id || req.user.role !== 'admin') {
+    if (author_id !== req.user.user_id && req.user.role !== 'admin') {
       return res
         .status(403)
         .json({ error: 'You can only update your own articles' })

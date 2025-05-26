@@ -58,3 +58,35 @@ export const getMyHealthConsultation = () => async (dispatch) => {
     dispatch(getError(error.message))
   }
 }
+
+export const updateHelth = (id, data) => async (dispatch) => {
+  dispatch(getRequest())
+  try {
+    const config = getAuthConfig()
+    const res = await axios.put(`/health-consultation/${id}`, data, config)
+    if (res.data.message) {
+      dispatch(getFailed(res.data.message))
+    } else {
+      dispatch(updateSuccess(res.data))
+      message.success('Cập nhật thành công')
+    }
+  } catch (error) {
+    dispatch(getError(error.message))
+  }
+}
+
+export const deleteHelth = (id) => async (dispatch) => {
+  dispatch(getRequest())
+  try {
+    const config = getAuthConfig()
+    const res = await axios.delete(`/health-consultation/${id}`, config)
+    if (res.data.message) {
+      dispatch(getFailed(res.data.message))
+    } else {
+      dispatch(deleteSuccess(id))
+      message.success('Xóa thành công')
+    }
+  } catch (error) {
+    dispatch(getError(error.message))
+  }
+}

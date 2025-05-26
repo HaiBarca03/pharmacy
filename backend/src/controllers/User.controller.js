@@ -70,10 +70,7 @@ const updateUser = async (req, res) => {
   try {
     const user_id = req.params.id
     const currentId = req.user.user_id
-    console.log('user_id', user_id)
-    console.log('currentId', currentId)
-    console.log('req.user.role', req.user.role)
-
+    console.log('req.body', req.body)
     if (req.user.role === 'admin' || user_id === currentId) {
       const updatedUser = await userService.updateUser(user_id, req.body)
       return res.status(200).json({
@@ -91,6 +88,7 @@ const updateUser = async (req, res) => {
 const deleteUsers = async (req, res) => {
   try {
     const { user_ids } = req.body
+    console.log('user_ids', user_ids)
 
     if (!Array.isArray(user_ids) || user_ids.length === 0) {
       return res

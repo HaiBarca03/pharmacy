@@ -1,4 +1,6 @@
 import MedicationDetails from '../components/MedicationDetails/MedicationDetails'
+import AdminCategory from '../page/Admin/AdminCategory/AdminCategory'
+import AdminPageHome from '../page/Admin/AdminPageHome/AdminPageHome'
 import ArticleHomePage from '../page/Article/ArticleHomePage'
 import ProductCategory from '../page/Category/ProductCategory'
 import HealthConsultationHomePage from '../page/HealthConsultation/HealthConsultationHomePage'
@@ -17,7 +19,7 @@ export const routes = [
   },
   {
     path: '/admin',
-    // page: AdminPage,
+    page: AdminPageHome,
     isShowHeader: false
   },
   {
@@ -59,6 +61,11 @@ export const routes = [
     path: '/health-consultation',
     page: HealthConsultationHomePage,
     isShowHeader: true
+  },
+  {
+    path: '/admin/category',
+    page: AdminCategory
+    // isShowHeader: true
   },
   {
     path: '*',

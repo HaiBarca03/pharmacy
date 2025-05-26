@@ -4,11 +4,7 @@ import { Row, Col } from 'antd'
 import './ArticleHomePage.css'
 import CreateArticleForm from '../../components/Article/CreateArticleForm'
 import ArticleList from '../../components/Article/ArticleList'
-import {
-  getAllArticle,
-  createArticle,
-  updateArticle
-} from '../../stores/Article/articleApis'
+import { getAllArticle } from '../../stores/Article/ArticleApis'
 
 const ArticleHomePage = () => {
   const articleList = useSelector(

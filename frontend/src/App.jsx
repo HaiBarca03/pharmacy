@@ -10,16 +10,22 @@ import { routes } from './routes/routes'
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute'
 
 function App() {
-  const [isAdmin, setIsAdmin] = useState(() => {
+  const getInitialAdminState = () => {
     try {
       const storedUser = localStorage.getItem('user')
-      const parsedUser = JSON.parse(storedUser)
-      return parsedUser?.isAdmin === true
+      if (storedUser) {
+        const parsedUser = JSON.parse(storedUser)
+        return parsedUser?.isAdmin === true
+      }
+      return false
     } catch (error) {
-      console.error('Lỗi khi parse user:', error)
+      console.error('Lỗi khi parse user từ localStorage:', error)
       return false
     }
-  })
+  }
+
+  const [isAdmin, setIsAdmin] = useState(getInitialAdminState())
+  const [loadingUser, setLoadingUser] = useState(false)
 
   return (
     <Router>

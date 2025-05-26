@@ -1,12 +1,39 @@
 import React from 'react'
-import { Card, Image, Typography, Button, Row, Col, Tooltip } from 'antd'
+import {
+  Card,
+  Image,
+  Typography,
+  Button,
+  Row,
+  Col,
+  Tooltip,
+  message
+} from 'antd'
 import { ShoppingCartOutlined, DollarOutlined } from '@ant-design/icons'
 import './CardProduct.css'
+import { useDispatch } from 'react-redux'
+import { createCart } from '../../stores/Cart/CartApis'
 
 const { Title, Text } = Typography
 
 const CardProduct = ({ product }) => {
-  const { name, price, image_url, dosage_form, id } = product
+  const dispatch = useDispatch()
+  const { name, price, image_url, dosage_form, id: productId } = product
+
+  const handleAddToCart = async () => {
+    const user = JSON.parse(localStorage.getItem('user'))
+    if (!user || !user.user_id) {
+      message.warning('Vui lòng đăng nhập để thêm vào giỏ hàng')
+      return
+    }
+
+    await dispatch(
+      createCart({
+        productId,
+        quantity: 1 // bạn có thể thay đổi thành số lượng người dùng chọn
+      })
+    )
+  }
 
   return (
     <Card
@@ -19,14 +46,14 @@ const CardProduct = ({ product }) => {
           height={150}
           fallback="https://via.placeholder.com/200x200.png?text=No+Image"
           preview={false}
-          onClick={() => (window.location.href = `/product/${id}`)}
+          onClick={() => (window.location.href = `/product/${productId}`)}
         />
       }
     >
       <Title
         level={5}
         className="product-name"
-        onClick={() => (window.location.href = `/product/${id}`)}
+        onClick={() => (window.location.href = `/product/${productId}`)}
       >
         {name}
       </Title>
@@ -45,7 +72,11 @@ const CardProduct = ({ product }) => {
       <Row justify="space-between" className="product-actions">
         <Col>
           <Tooltip title="Thêm vào giỏ hàng">
-            <Button icon={<ShoppingCartOutlined />} className="action-btn" />
+            <Button
+              icon={<ShoppingCartOutlined />}
+              className="action-btn"
+              onClick={handleAddToCart}
+            />
           </Tooltip>
         </Col>
         <Col>
@@ -54,6 +85,7 @@ const CardProduct = ({ product }) => {
               type="primary"
               icon={<DollarOutlined />}
               className="action-btn buy-now"
+              onClick={() => (window.location.href = `/product/${productId}`)}
             >
               Mua ngay
             </Button>

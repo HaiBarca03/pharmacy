@@ -6,6 +6,8 @@ const OrderItem = require('./OrderItem')
 const Article = require('./Article')
 const HealthConsultation = require('./HealthConsultation')
 const Category = require('./Category')
+const CartItem = require('./CartItem')
+const Cart = require('./Cart')
 
 const db = {
   sequelize,
@@ -15,7 +17,9 @@ const db = {
   OrderItem,
   Article,
   HealthConsultation,
-  Category
+  Category,
+  Cart,
+  CartItem
 }
 
 require('./associations')(db)

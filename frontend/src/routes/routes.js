@@ -2,6 +2,7 @@ import MedicationDetails from '../components/MedicationDetails/MedicationDetails
 import AdminCategory from '../page/Admin/AdminCategory/AdminCategory'
 import AdminPageHome from '../page/Admin/AdminPageHome/AdminPageHome'
 import ArticleHomePage from '../page/Article/ArticleHomePage'
+import Cart from '../page/Cart/Cart'
 import ProductCategory from '../page/Category/ProductCategory'
 import HealthConsultationHomePage from '../page/HealthConsultation/HealthConsultationHomePage'
 import HomePage from '../page/HomePage/HomePage'
@@ -62,6 +63,11 @@ export const routes = [
   {
     path: '/health-consultation',
     page: HealthConsultationHomePage,
+    isShowHeader: true
+  },
+  {
+    path: '/cart',
+    page: Cart,
     isShowHeader: true
   },
   {

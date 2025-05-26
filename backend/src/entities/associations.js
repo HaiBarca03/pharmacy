@@ -5,7 +5,9 @@ module.exports = ({
   OrderItem,
   Article,
   HealthConsultation,
-  Category
+  Category,
+  Cart,
+  CartItem
 }) => {
   // User → Orders
   User.hasMany(Order, { foreignKey: 'user_id' })
@@ -30,4 +32,16 @@ module.exports = ({
   // Category → Products
   Category.hasMany(Product, { foreignKey: 'category_id' })
   Product.belongsTo(Category, { foreignKey: 'category_id' })
+
+  // Cart -> CartItems
+  Cart.hasMany(CartItem, { foreignKey: 'cart_id' })
+  CartItem.belongsTo(Cart, { foreignKey: 'cart_id' })
+
+  // CartItem → Product
+  Product.hasMany(CartItem, { foreignKey: 'product_id' })
+  CartItem.belongsTo(Product, { foreignKey: 'product_id' })
+
+  // User → Cart
+  User.hasOne(Cart, { foreignKey: 'user_id' })
+  Cart.belongsTo(User, { foreignKey: 'user_id' })
 }

@@ -74,6 +74,9 @@ const Header = () => {
   const handleHome = () => {
     navigate('/')
   }
+  const handleCart = () => {
+    navigate('/cart')
+  }
   return (
     <div className="header-container">
       <Row align="middle" className="header-row">
@@ -96,7 +99,11 @@ const Header = () => {
           <div className="user-actions-container">
             <Space size="middle">
               <Button icon={<BellOutlined />} className="icon-button" />
-              <Button icon={<ShoppingCartOutlined />} className="icon-button" />
+              <Button
+                icon={<ShoppingCartOutlined />}
+                onClick={handleCart}
+                className="icon-button"
+              />
               {user ? (
                 <div className="user-info">
                   <div className="avatar-wrapper" onClick={handleProfile}>

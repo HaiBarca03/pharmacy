@@ -4,6 +4,7 @@ import { productReducer } from './Product/productSlice'
 import { CategoryReducer } from './Category/CategorySlice'
 import { HealthConsultationReducer } from './HealthConsultation/HealthConsultationSlice'
 import { articleReducer } from './Article/ArticleSlice'
+import { CartReducer } from './Cart/CartSlice'
 
 const store = configureStore({
   reducer: {
@@ -11,7 +12,8 @@ const store = configureStore({
     product: productReducer,
     category: CategoryReducer,
     healthConsultation: HealthConsultationReducer,
-    article: articleReducer
+    article: articleReducer,
+    cart: CartReducer
   }
 })
 

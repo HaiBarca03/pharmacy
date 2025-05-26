@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import {
   createProduct,
   getAllProducts
-} from '../../../stores/Product/ProductApis'
+} from '../../../stores/Product/productApis'
 import CreateProductModal from './CreateProduct'
 
 const AdminProduct = () => {

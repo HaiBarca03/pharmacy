@@ -58,11 +58,8 @@ export const createProduct = (newProduct) => async (dispatch) => {
     } else {
       dispatch(createSuccess(res.data))
       message.success('Tạo sản phẩm thành công!')
-      dispatch(getAllProducts())
     }
   } catch (error) {
     dispatch(getError(error.message))
   }
 }
-
-export {}

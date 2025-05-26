@@ -1,28 +1,28 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-  productsList: [],
-  productDetails: {},
+  HealthConsultationsList: [],
+  HealthConsultationDetail: {},
   loading: false,
   error: null,
   response: null
 }
 
-const productSlice = createSlice({
-  name: 'products',
+const HealthConsultationSlice = createSlice({
+  name: 'HealthConsultation',
   initialState,
   reducers: {
     getRequest: (state) => {
       state.loading = true
     },
     doneSuccess: (state, action) => {
-      state.productDetails = action.payload
+      state.HealthConsultationDetail = action.payload
       state.loading = false
       state.error = null
       state.response = null
     },
     getSuccess: (state, action) => {
-      state.productsList = action.payload
+      state.HealthConsultationsList = action.payload
       state.loading = false
       state.error = null
       state.response = null
@@ -42,7 +42,7 @@ const productSlice = createSlice({
       state.response = null
     },
     deleteSuccess: (state, action) => {
-      state.productsList = state.productsList.filter(
+      state.HealthConsultationsList = state.HealthConsultationsList.filter(
         (item) => item.user_id !== action.payload
       )
       state.loading = false
@@ -50,32 +50,32 @@ const productSlice = createSlice({
       state.response = 'Deleted successfully'
     },
     createSuccess: (state, action) => {
-      if (!Array.isArray(state.productsList)) {
-        state.productsList = []
+      if (!Array.isArray(state.HealthConsultationsList)) {
+        state.HealthConsultationsList = []
       }
-      state.productsList.push(action.payload)
+      state.HealthConsultationsList.push(action.payload)
       state.loading = false
       state.error = null
       state.response = 'Created successfully'
     },
     updateSuccess: (state, action) => {
-      if (Array.isArray(state.productsList)) {
-        const index = state.productsList.findIndex(
+      if (Array.isArray(state.HealthConsultationsList)) {
+        const index = state.HealthConsultationsList.findIndex(
           (item) => item.user_id === action.payload.user_id
         )
         if (index !== -1) {
-          state.productsList[index] = action.payload
+          state.HealthConsultationsList[index] = action.payload
         }
       } else {
-        console.warn('productsList is not an array!', state.productsList)
+        console.warn(
+          'HealthConsultationsList is not an array!',
+          state.HealthConsultationsList
+        )
       }
 
       state.loading = false
       state.error = null
       state.response = 'Updated successfully'
-    },
-    clearProductDetails: (state) => {
-      state.productDetails = {}
     }
   }
 })
@@ -89,8 +89,7 @@ export const {
   postDone,
   deleteSuccess,
   createSuccess,
-  updateSuccess,
-  clearProductDetails
-} = productSlice.actions
+  updateSuccess
+} = HealthConsultationSlice.actions
 
-export const productReducer = productSlice.reducer
+export const HealthConsultationReducer = HealthConsultationSlice.reducer

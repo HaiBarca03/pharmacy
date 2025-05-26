@@ -1,0 +1,60 @@
+/* IntroPage.css */
+
+.intro-container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #f8fbff;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', sans-serif;
+  color: #333;
+}
+
+.intro-title {
+  text-align: center;
+  font-size: 2.8rem;
+  color: #1890ff;
+  margin-bottom: 0.5rem;
+}
+
+.intro-subtitle {
+  text-align: center;
+  font-size: 1.25rem;
+  margin-bottom: 2rem;
+  color: #555;
+}
+
+.intro-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.intro-icon {
+  font-size: 2rem;
+  color: #1890ff;
+  margin-right: 1rem;
+  margin-top: 0.2rem;
+}
+
+.intro-section h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: #1e1e1e;
+}
+
+.intro-section p {
+  margin: 0.25rem 0 0 0;
+  color: #555;
+  font-size: 0.95rem;
+}
+
+.intro-text {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

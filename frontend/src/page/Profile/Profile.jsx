@@ -45,7 +45,7 @@ const Profile = () => {
           <Col xs={24} md={8} className="text-center">
             <Avatar
               size={150}
-              src="https://i.pinimg.com/originals/21/5e/c4/215ec43211a20eae7e68d9ad60d9c1f6.jpg"
+              src="https://e7.pngegg.com/pngimages/297/49/png-clipart-pharmacy-symbol-aboriginal-text-logo-thumbnail.png"
               icon={<UserOutlined />}
             />
             <Title level={3} style={{ marginTop: 16 }}>

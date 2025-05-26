@@ -1,10 +1,11 @@
 .logo-image {
-  height: 40px;
+  height: 55px;
+  border-radius: 30px;
   vertical-align: middle;
 }
 
 .header-container {
-  background-color: #003087;
+  background-color: #1a51a2;
   color: #fff;
   width: 100%;
 }
@@ -18,7 +19,7 @@
 .search-bar {
   width: 100%;
   border-radius: 20px;
-  padding: 5px 10px;
+  padding: 0px 10px;
 }
 
 .search-bar .ant-input {
@@ -33,6 +34,19 @@
 
 .header-actions {
   text-align: right;
+}
+.user-avatar {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: #fff 2px solid;
+  cursor: pointer;
+}
+
+.user-name {
+  font-weight: 500;
+  color: #333;
 }
 
 .icon-button {
@@ -67,7 +81,6 @@
   padding: 10px 20px;
   max-width: 1200px;
   margin: 0 auto;
-  border-bottom: 1px solid #e8e8e8;
 }
 
 .nav-links .ant-btn {
@@ -86,15 +99,32 @@
 .chat-button:hover {
   color: #e65c00 !important;
 }
+.custom-dropdown-menu {
+  padding: 12px !important;
+  border-radius: 8px;
+  width: 400px;
+}
+
+.dropdown-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 8px;
+}
 
 .category-scroll {
   display: flex;
   overflow-x: auto;
-  gap: 16px;
+  max-width: 100%; /* Đảm bảo không vượt chiều rộng màn hình */
+  white-space: nowrap; /* Ngăn ngắt dòng */
   padding: 4px 0;
-  -webkit-overflow-scrolling: touch; /* Smooth scrolling on mobile */
+  gap: 16px;
+  scrollbar-width: thin; /* Firefox */
+  -webkit-overflow-scrolling: touch;
 }
-
+.category-dropdown-button {
+  font-size: 15px;
+  text-transform: uppercase;
+}
 .category-scroll::-webkit-scrollbar {
   height: 8px;
 }
@@ -110,4 +140,32 @@
 
 .category-scroll::-webkit-scrollbar-thumb:hover {
   background: #555;
+}
+
+.category-scroll-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  max-width: 1050px;
+  overflow: hidden;
+}
+
+.category-scroll {
+  display: flex;
+  overflow-x: auto;
+  white-space: nowrap;
+  scrollbar-width: none; /* Ẩn scrollbar trên Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
+}
+
+.category-scroll::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
+
+.scroll-button {
+  background: transparent;
+  color: #fff;
+  border: none;
+  font-size: 16px;
 }

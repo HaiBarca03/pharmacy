@@ -1,0 +1,40 @@
+.app-footer {
+  background: #f9f9f9;
+  padding: 40px 0;
+  border-top: 5px solid #4267b2;
+  margin-top: 30px;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.footer-divider {
+  margin: 12px 0;
+}
+
+.footer-social-icons .anticon {
+  font-size: 20px;
+}
+
+.footer-social-icons .facebook {
+  color: #4267b2;
+}
+
+.footer-social-icons .youtube {
+  color: #ff0000;
+}
+
+.footer-social-icons .global {
+  color: #00b2ff;
+}
+
+.footer-app-icons .anticon {
+  font-size: 20px;
+}
+
+.footer-payment img {
+  width: 30px;
+}

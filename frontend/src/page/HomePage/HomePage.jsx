@@ -6,6 +6,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getAllProducts } from '../../stores/Product/productApis'
 import CardProduct from '../../components/CardProduct/CardProduct'
 import QuickSession from '../../components/QuickSession/QuickSession'
+import QuestionForm from '../../components/HealthConsultation/QuestionForm'
+import ContactWithMap from '../../components/ContactWithMap/ContactWithMap'
+import IntroPage from '../IntroPage/IntroPage'
 
 const HomePage = () => {
   const listProduct = useSelector((state) => state.product.productsList || {})
@@ -54,8 +57,42 @@ const HomePage = () => {
           </Row>
         )}
       </div>
+      <div className="homepage-all-products">
+        <Space direction="vertical" size="large" style={{ width: '100%' }}>
+          <h2 className="homepage-title">Phòng Covid, tăng đề kháng</h2>
+        </Space>
+        {loading ? (
+          <Spin size="large" />
+        ) : (
+          <Row gutter={[16, 16]} className="product-grid">
+            {products.map((product) => (
+              <Col
+                xs={24}
+                sm={12}
+                md={4}
+                lg={4}
+                key={product.id}
+                className="product-col"
+              >
+                <CardProduct product={product} />
+              </Col>
+            ))}
+          </Row>
+        )}
+      </div>
+      <div className="homepage-all-products">
+        <Space
+          direction="vertical"
+          size="large"
+          style={{ width: '100%' }}
+        ></Space>
+        <QuestionForm />
+      </div>
+      <div id="contact-with-map" className="homepage-all-products">
+        <ContactWithMap />
+      </div>
       <div>
-        <p className="homepage-more">Xem tất cả</p>
+        <IntroPage />
       </div>
     </div>
   )

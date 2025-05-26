@@ -1,4 +1,5 @@
 import MedicationDetails from '../components/MedicationDetails/MedicationDetails'
+import ProductCategory from '../page/Category/ProductCategory'
 import HomePage from '../page/HomePage/HomePage'
 import Login from '../page/Login/Login'
 import NotFoundPage from '../page/NotPoundPage/NotPoundPage'
@@ -35,6 +36,11 @@ export const routes = [
   {
     path: '/profile/edit',
     page: UpdateProfile,
+    isShowHeader: true
+  },
+  {
+    path: '/product/category/:id',
+    page: ProductCategory,
     isShowHeader: true
   },
   {

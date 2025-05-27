@@ -15,7 +15,7 @@ import {
   getAllOrders,
   updateOrderStatus,
   deleteOrder
-} from '../../../stores/Order/OrderApis'
+} from '../../../stores/Order/orderApis'
 import OrderDetail from '../../../components/Order/OrderDetailCpn'
 
 const { Option } = Select

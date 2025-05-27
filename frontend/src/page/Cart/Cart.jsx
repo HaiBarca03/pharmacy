@@ -5,7 +5,6 @@ import CartItem from '../CartItem/CartItem'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { getMyCart } from '../../stores/Cart/CartApis'
-import { createOrder } from '../../stores/Order/OrderApis'
 
 const Cart = () => {
   const myCartList = useSelector((state) => state.cart.MyCartList || {})

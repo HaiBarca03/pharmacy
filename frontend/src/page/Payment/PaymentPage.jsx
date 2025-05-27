@@ -12,7 +12,7 @@ import {
 } from 'antd'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useLocation } from 'react-router-dom'
-import { createOrder } from '../../stores/Order/OrderApis'
+import { createOrder } from '../../stores/Order/orderApis'
 
 const PaymentPage = () => {
   const dispatch = useDispatch()

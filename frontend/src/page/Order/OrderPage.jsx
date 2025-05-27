@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { getMyOrder } from '../../stores/Order/OrderApis'
+import { getMyOrder } from '../../stores/Order/orderApis'
 import { List, Card, Tag, Image, Typography, Row, Col, Select } from 'antd'
 import './OrderPage.css'
 import { useNavigate } from 'react-router-dom'

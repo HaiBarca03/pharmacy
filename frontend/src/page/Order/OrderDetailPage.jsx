@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import { getOrderDetails } from '../../stores/Order/OrderApis'
+import { getOrderDetails } from '../../stores/Order/orderApis'
 import { Card, Typography, Tag, Image, Row, Col, List } from 'antd'
 import './OrderDetailPage.css'
 

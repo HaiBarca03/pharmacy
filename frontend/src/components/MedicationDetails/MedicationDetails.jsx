@@ -7,7 +7,6 @@ import { getDetailProducts } from '../../stores/Product/productApis'
 import { clearProductDetails } from '../../stores/Product/productSlice'
 import { createCart } from '../../stores/Cart/CartApis'
 import { createOrder } from '../../stores/Order/OrderApis'
-
 const { Title, Text } = Typography
 
 const MedicationDetails = () => {

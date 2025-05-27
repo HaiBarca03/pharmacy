@@ -5,13 +5,13 @@ import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { FcGoogle } from 'react-icons/fc'
 import { FaFacebook } from 'react-icons/fa'
-import 'antd/dist/reset.css' // Ant Design styles
-import './Login.css' // Custom styles
+import 'antd/dist/reset.css'
+import './Login.css'
 import { loginUser } from '../../stores/User/userApis'
 
 const { Title } = Typography
 
-const Login = () => {
+const Login = ({ setIsAdmin }) => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -21,25 +21,19 @@ const Login = () => {
       message.success('Đăng nhập thành công!')
       const storedUser = localStorage.getItem('user')
       const parsedUser = JSON.parse(storedUser)
-      if (parsedUser.isAdmin === true || parsedUser.role === 'admin') {
+      if (parsedUser?.isAdmin === true || parsedUser?.role === 'admin') {
+        setIsAdmin(true) // Cập nhật trạng thái isAdmin
         setTimeout(() => {
           navigate('/admin')
         }, 100)
       } else {
+        setIsAdmin(false)
         navigate('/')
       }
     } catch (error) {
       message.error(error.message || 'Đăng nhập thất bại')
     }
   }
-
-  // const handleGoogleLogin = () => {
-  //   window.location.href = 'https://managemyphotos.onrender.com/auth/google'
-  // }
-
-  // const handleFacebookLogin = () => {
-  //   window.location.href = 'https://managemyphotos.onrender.com/auth/facebook'
-  // }
 
   return (
     <div className="login-container">
@@ -52,7 +46,6 @@ const Login = () => {
         <Title level={2} className="form-title">
           Đăng Nhập
         </Title>
-
         <Form.Item
           name="identifier"
           rules={[
@@ -65,11 +58,10 @@ const Login = () => {
         >
           <Input
             prefix={<UserOutlined />}
-            placeholder="Email hoăc Số điện thoại"
+            placeholder="Email hoặc Số điện thoại"
             className="form-input"
           />
         </Form.Item>
-
         <Form.Item
           name="password"
           rules={[{ required: true, message: 'Vui lòng nhập Mật khẩu!' }]}
@@ -80,13 +72,11 @@ const Login = () => {
             className="form-input"
           />
         </Form.Item>
-
         <Form.Item>
           <a href="/forgot-password" className="forgot-password">
             Quên mật khẩu?
           </a>
         </Form.Item>
-
         <Form.Item>
           <Button
             type="primary"
@@ -97,13 +87,10 @@ const Login = () => {
             Đăng Nhập
           </Button>
         </Form.Item>
-
         <Divider plain>Hoặc</Divider>
-
         <Form.Item>
           <Button
             icon={<FcGoogle size={20} />}
-            // onClick={handleGoogleLogin}
             className="social-button google-button"
             block
           >
@@ -111,14 +98,12 @@ const Login = () => {
           </Button>
           <Button
             icon={<FaFacebook size={20} />}
-            // onClick={handleFacebookLogin}
             className="social-button facebook-button"
             block
           >
             Đăng nhập với Facebook
           </Button>
         </Form.Item>
-
         <div className="register-link">
           Bạn chưa có tài khoản?{' '}
           <a href="/register" className="register-link-text">

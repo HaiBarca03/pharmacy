@@ -18,13 +18,14 @@ import AdminAccount from '../AdminAccount/AdminAccount'
 import AdminArticle from '../AdminArticle/AdminArticle'
 import AdminHealthConsultation from '../AdminHealthConsultation/AdminHealthConsultation'
 import AdminProduct from '../AdminProduct/AdminProduct'
+import AdminOrder from '../AdminOrder/AdminOrder'
 const { Header, Sider, Content } = Layout
 
 const AdminPageHome = () => {
   const navigate = useNavigate()
   const [collapsed, setCollapsed] = useState(false)
   const [selectedKey, setSelectedKey] = useState('articles')
-
+  const user = JSON.parse(localStorage.getItem('user'))
   const handleLogout = () => {
     localStorage.removeItem('token')
     localStorage.removeItem('user')
@@ -41,7 +42,7 @@ const AdminPageHome = () => {
       case 'products':
         return <AdminProduct />
       case 'orders':
-        return <h2>Quản lý đơn hàng</h2>
+        return <AdminOrder />
       case 'categories':
         return <AdminCategory />
       case 'logout':
@@ -56,7 +57,7 @@ const AdminPageHome = () => {
   return (
     <Layout className="admin-layout">
       <Sider trigger={null} collapsible collapsed={collapsed}>
-        <div className="ad-logo">ADMIN</div>
+        <div className="ad-logo">{user.name}</div>
         <Menu
           theme="dark"
           mode="inline"

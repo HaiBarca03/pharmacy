@@ -1,42 +1,28 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-  productsList: [],
-  productsPriceList: [],
-  productDetails: {},
-  productSearch: {},
+  orderList: [],
+  orderDetails: {},
   loading: false,
   error: null,
   response: null
 }
 
-const productSlice = createSlice({
-  name: 'products',
+const orderSlice = createSlice({
+  name: 'order',
   initialState,
   reducers: {
     getRequest: (state) => {
       state.loading = true
     },
     doneSuccess: (state, action) => {
-      state.productDetails = action.payload
+      state.orderDetails = action.payload
       state.loading = false
       state.error = null
       state.response = null
     },
     getSuccess: (state, action) => {
-      state.productsList = action.payload
-      state.loading = false
-      state.error = null
-      state.response = null
-    },
-    getSuccessPrice: (state, action) => {
-      state.productsPriceList = action.payload
-      state.loading = false
-      state.error = null
-      state.response = null
-    },
-    getSearch: (state, action) => {
-      state.productSearch = action.payload
+      state.orderList = action.payload
       state.loading = false
       state.error = null
       state.response = null
@@ -56,7 +42,7 @@ const productSlice = createSlice({
       state.response = null
     },
     deleteSuccess: (state, action) => {
-      state.productsList = state.productsList.filter(
+      state.orderList = state.orderList.filter(
         (item) => item.user_id !== action.payload
       )
       state.loading = false
@@ -64,32 +50,32 @@ const productSlice = createSlice({
       state.response = 'Deleted successfully'
     },
     createSuccess: (state, action) => {
-      if (!Array.isArray(state.productsList)) {
-        state.productsList = []
+      if (!Array.isArray(state.orderList)) {
+        state.orderList = []
       }
-      state.productsList.push(action.payload)
+      state.orderList.push(action.payload)
       state.loading = false
       state.error = null
       state.response = 'Created successfully'
     },
     updateSuccess: (state, action) => {
-      if (Array.isArray(state.productsList)) {
-        const index = state.productsList.findIndex(
+      if (Array.isArray(state.orderList)) {
+        const index = state.orderList.findIndex(
           (item) => item.user_id === action.payload.user_id
         )
         if (index !== -1) {
-          state.productsList[index] = action.payload
+          state.orderList[index] = action.payload
         }
       } else {
-        console.warn('productsList is not an array!', state.productsList)
+        console.warn('orderList is not an array!', state.orderList)
       }
 
       state.loading = false
       state.error = null
       state.response = 'Updated successfully'
     },
-    clearProductDetails: (state) => {
-      state.productDetails = {}
+    clearOrderDetails: (state) => {
+      state.orderDetails = {}
     }
   }
 })
@@ -104,9 +90,7 @@ export const {
   deleteSuccess,
   createSuccess,
   updateSuccess,
-  clearProductDetails,
-  getSearch,
-  getSuccessPrice
-} = productSlice.actions
+  clearOrderDetails
+} = orderSlice.actions
 
-export const productReducer = productSlice.reducer
+export const orderReducer = orderSlice.reducer

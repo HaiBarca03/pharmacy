@@ -13,11 +13,13 @@ import { ShoppingCartOutlined, DollarOutlined } from '@ant-design/icons'
 import './CardProduct.css'
 import { useDispatch } from 'react-redux'
 import { createCart } from '../../stores/Cart/CartApis'
+import { useNavigate } from 'react-router-dom'
 
 const { Title, Text } = Typography
 
 const CardProduct = ({ product }) => {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const { name, price, image_url, dosage_form, id: productId } = product
 
   const handleAddToCart = async () => {
@@ -33,6 +35,7 @@ const CardProduct = ({ product }) => {
         quantity: 1 // bạn có thể thay đổi thành số lượng người dùng chọn
       })
     )
+    navigate('/cart')
   }
 
   return (

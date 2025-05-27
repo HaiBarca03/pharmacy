@@ -1,4 +1,4 @@
-const { Op } = require('sequelize')
+const { Op, fn, col, where, literal } = require('sequelize')
 const { Product, Category } = require('../entities')
 
 const createProduct = async (data) => {
@@ -158,11 +158,87 @@ const getProductById = async (id) => {
   return product.toJSON()
 }
 
+const searchProducts = async (keyword = '', page = 1, limit = 12) => {
+  const pageNum = parseInt(page) || 1
+  const limitNum = parseInt(limit) || 12
+  const offset = (pageNum - 1) * limitNum
+  const safeKeyword = String(keyword || '').toLowerCase()
+
+  const { count, rows } = await Product.findAndCountAll({
+    where: {
+      name: where(fn('LOWER', col('name')), {
+        [Op.like]: `%${safeKeyword}%`
+      })
+    },
+    offset,
+    limit: limitNum
+  })
+
+  return {
+    total: count,
+    page: pageNum,
+    limit: limitNum,
+    products: rows.map((p) => p.toJSON())
+  }
+}
+
+const getProductsByPriceAsc = async (filters = {}) => {
+  const {
+    page = 1,
+    limit = 12,
+    priceMin,
+    priceMax,
+    manufacturer,
+    is_prescription,
+    category_id
+  } = filters
+
+  const offset = (page - 1) * limit
+
+  const where = {}
+
+  if (priceMin || priceMax) {
+    where.price = {}
+    if (priceMin) where.price[Op.gte] = priceMin
+    if (priceMax) where.price[Op.lte] = priceMax
+  }
+
+  if (manufacturer) {
+    where.manufacturer = {
+      [Op.like]: `%${manufacturer}%`
+    }
+  }
+
+  if (is_prescription !== undefined) {
+    where.is_prescription = is_prescription === 'true'
+  }
+
+  if (category_id) {
+    where.category_id = category_id
+  }
+
+  const { count, rows } = await Product.findAndCountAll({
+    where,
+    offset,
+    limit: parseInt(limit),
+    order: [['price', 'ASC']] // Sắp xếp giá tăng dần
+  })
+
+  return {
+    total: count,
+    page: parseInt(page),
+    limit: parseInt(limit),
+    products: rows.map((p) => p.toJSON())
+  }
+}
+
 module.exports = {
   createProduct,
   getAllProducts,
   updateProduct,
   deleteProduct,
   getProductsByCategoryId,
-  getProductById
+  getProductById,
+  searchProducts,
+  getProductsByPriceAsc
 }

@@ -34,8 +34,12 @@ const QuickSession = () => {
       >
         Tư vấn
       </Button>
-      <Button className="category-button" icon={<MedicineBoxOutlined />}>
-        Danh mục
+      <Button
+        className="category-button"
+        icon={<MedicineBoxOutlined />}
+        onClick={() => navigate('/all-product')}
+      >
+        Sản phẩm
       </Button>
       <Button
         className="category-button"
@@ -47,7 +51,11 @@ const QuickSession = () => {
       <Button className="category-button" icon={<TeamOutlined />}>
         Hỗ trợ sức khỏe
       </Button>
-      <Button className="category-button" icon={<ShoppingCartOutlined />}>
+      <Button
+        className="category-button"
+        icon={<ShoppingCartOutlined />}
+        onClick={() => navigate('/cart')}
+      >
         Giỏ hàng
       </Button>
       <Button className="category-button" icon={<SmileOutlined />}>

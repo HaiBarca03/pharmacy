@@ -8,9 +8,14 @@ import HealthConsultationHomePage from '../page/HealthConsultation/HealthConsult
 import HomePage from '../page/HomePage/HomePage'
 import Login from '../page/Login/Login'
 import NotFoundPage from '../page/NotPoundPage/NotPoundPage'
+import OrderDetailPage from '../page/Order/OrderDetailPage'
+import OrderPage from '../page/Order/OrderPage'
+import PaymentPage from '../page/Payment/PaymentPage'
+import ProductAll from '../page/Product/ProductAllPage'
 import Profile from '../page/Profile/Profile'
 import UpdateProfile from '../page/Profile/UpdateProfile'
 import RegisterPage from '../page/Register/RegisterPage'
+import ProductSeach from '../page/Search/ProductSeach'
 import Unauthorized from '../page/Unauthorized/Unauthorized'
 
 export const routes = [
@@ -46,8 +51,18 @@ export const routes = [
     isShowHeader: true
   },
   {
+    path: '/all-product',
+    page: ProductAll,
+    isShowHeader: true
+  },
+  {
     path: '/product/category/:id',
     page: ProductCategory,
+    isShowHeader: true
+  },
+  {
+    path: '/search/:keyword',
+    page: ProductSeach,
     isShowHeader: true
   },
   {
@@ -68,6 +83,21 @@ export const routes = [
   {
     path: '/cart',
     page: Cart,
+    isShowHeader: true
+  },
+  {
+    path: '/order',
+    page: OrderPage,
+    isShowHeader: true
+  },
+  {
+    path: '/order/:id',
+    page: OrderDetailPage,
+    isShowHeader: true
+  },
+  {
+    path: '/payment',
+    page: PaymentPage,
     isShowHeader: true
   },
   {

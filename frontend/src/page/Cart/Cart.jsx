@@ -1,15 +1,17 @@
-import React, { useEffect } from 'react'
-import { Button, Row, Col } from 'antd'
+import React, { useEffect, useState } from 'react'
+import { Button, Row, Col, message } from 'antd'
 import './Cart.css'
 import CartItem from '../CartItem/CartItem'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { getMyCart } from '../../stores/Cart/CartApis'
+import { createOrder } from '../../stores/Order/OrderApis'
 
 const Cart = () => {
   const myCartList = useSelector((state) => state.cart.MyCartList || {})
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const [selectedItems, setSelectedItems] = useState([])
 
   const user = JSON.parse(localStorage.getItem('user'))
   const userId = user?.user_id || null
@@ -27,13 +29,26 @@ const Cart = () => {
     0
   )
 
+  const handleCheckout = async () => {
+    if (selectedItems.length === 0) {
+      return message.warning('Vui lòng chọn ít nhất 1 sản phẩm để thanh toán!')
+    }
+    navigate('/payment', { state: { selectedItems } })
+  }
+
   return (
     <div className="cart-container">
       <div className="cart-content">
         <div className="cart-items">
           <h2>Giỏ hàng ({cartItems.length})</h2>
           {cartItems.map((item) => (
-            <CartItem key={item.id} item={item} userId={userId} />
+            <CartItem
+              key={item.id}
+              item={item}
+              userId={userId}
+              selectedItems={selectedItems}
+              setSelectedItems={setSelectedItems}
+            />
           ))}
         </div>
         <div className="cart-summary">
@@ -43,8 +58,12 @@ const Cart = () => {
               {total.toLocaleString()} đ
             </Col>
           </Row>
-          <Button type="primary" className="checkout-button">
-            Mua hàng ({cartItems.length})
+          <Button
+            type="primary"
+            className="checkout-button"
+            onClick={handleCheckout}
+          >
+            Mua hàng ({selectedItems.length})
           </Button>
         </div>
       </div>

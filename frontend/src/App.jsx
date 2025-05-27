@@ -1,10 +1,5 @@
-import { useState, useEffect, Fragment, lazy, Suspense } from 'react'
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate
-} from 'react-router-dom'
+import { Fragment, Suspense, useState } from 'react'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Default from './components/Default/Default'
 import { routes } from './routes/routes'
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute'
@@ -33,10 +28,9 @@ function App() {
         <Routes>
           {routes.map(({ path, page: Page, isPrivate, isShowHeader }, idx) => {
             const Layout = isShowHeader ? Default : Fragment
-
             const element = (
               <Layout>
-                <Page />
+                <Page setIsAdmin={setIsAdmin} /> {/* Truyền setIsAdmin */}
               </Layout>
             )
 

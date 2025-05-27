@@ -39,6 +39,34 @@ const getAllProducts = async (req, res) => {
   }
 }
 
+const getProductsSortedByPrice = async (req, res) => {
+  try {
+    const filters = {
+      page: req.query.page,
+      limit: req.query.limit,
+      priceMin: req.query.priceMin,
+      priceMax: req.query.priceMax,
+      manufacturer: req.query.manufacturer,
+      is_prescription: req.query.is_prescription,
+      category_id: req.query.category_id
+    }
+
+    if (filters.category_id) {
+      const checkCategoryId = await categoryService.getCategoryById(
+        filters.category_id
+      )
+      if (!checkCategoryId) {
+        return res.status(400).json({ error: 'Không có danh mục này' })
+      }
+    }
+
+    const result = await productService.getProductsByPriceAsc(filters)
+    res.status(200).json(result)
+  } catch (err) {
+    res.status(500).json({ error: err.message })
+  }
+}
+
 const updateProduct = async (req, res) => {
   try {
     const id = req.params.id
@@ -99,11 +127,23 @@ const getProductById = async (req, res) => {
   }
 }
 
+const searchProducts = async (req, res) => {
+  try {
+    const { keyword = '', page = 1, limit = 12 } = req.query
+    const result = await productService.searchProducts(keyword, page, limit)
+    res.json(result)
+  } catch (error) {
+    res.status(500).json({ error: error.message })
+  }
+}
+
 module.exports = {
   createProduct,
   getAllProducts,
   updateProduct,
   deleteProduct,
   getProductsByCategoryId,
-  getProductById
+  getProductById,
+  searchProducts,
+  getProductsSortedByPrice
 }

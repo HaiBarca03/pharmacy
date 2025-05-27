@@ -3,7 +3,10 @@ import './HomePage.css'
 import { Card, Row, Col, Space, Button, Spin } from 'antd'
 import BannerSection from '../../components/BannerSection/BannerSection'
 import { useDispatch, useSelector } from 'react-redux'
-import { getAllProducts } from '../../stores/Product/productApis'
+import {
+  getAllProducts,
+  getProductsByPrice
+} from '../../stores/Product/productApis'
 import CardProduct from '../../components/CardProduct/CardProduct'
 import QuickSession from '../../components/QuickSession/QuickSession'
 import QuestionForm from '../../components/HealthConsultation/QuestionForm'
@@ -12,12 +15,17 @@ import IntroPage from '../IntroPage/IntroPage'
 
 const HomePage = () => {
   const listProduct = useSelector((state) => state.product.productsList || {})
+  const productsPriceList = useSelector(
+    (state) => state.product.productsPriceList || {}
+  )
   const [loading, setLoading] = useState(true)
   const products = listProduct.products || []
+  const productsPrice = productsPriceList.products || []
   const dispatch = useDispatch()
-
+  console.log('productsPrice', productsPrice)
   useEffect(() => {
     dispatch(getAllProducts())
+    dispatch(getProductsByPrice())
   }, [dispatch])
 
   useEffect(() => {
@@ -59,13 +67,13 @@ const HomePage = () => {
       </div>
       <div className="homepage-all-products">
         <Space direction="vertical" size="large" style={{ width: '100%' }}>
-          <h2 className="homepage-title">Phòng Covid, tăng đề kháng</h2>
+          <h2 className="homepage-title">Sản phẩm giá tốt nhất</h2>
         </Space>
         {loading ? (
           <Spin size="large" />
         ) : (
           <Row gutter={[16, 16]} className="product-grid">
-            {products.map((product) => (
+            {productsPrice.map((product) => (
               <Col
                 xs={24}
                 sm={12}

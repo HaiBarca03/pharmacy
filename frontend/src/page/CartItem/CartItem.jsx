@@ -5,7 +5,7 @@ import './CartItem.css'
 import { useDispatch } from 'react-redux'
 import { updateCart, getMyCart, deleteCart } from '../../stores/Cart/CartApis'
 
-const CartItem = ({ item, userId }) => {
+const CartItem = ({ item, userId, selectedItems, setSelectedItems }) => {
   const dispatch = useDispatch()
   const { id, price, quantity: initialQty, Product, product_id } = item
   const { name, image_url } = Product
@@ -24,12 +24,25 @@ const CartItem = ({ item, userId }) => {
     await dispatch(deleteCart(userId, { productIds: [product_id] }))
     dispatch(getMyCart(userId))
   }
+  const isChecked = selectedItems.includes(item.id)
+
+  const toggleCheckbox = () => {
+    if (isChecked) {
+      setSelectedItems(selectedItems.filter((id) => id !== item.id))
+    } else {
+      setSelectedItems([...selectedItems, item.id])
+    }
+  }
 
   return (
     <Card className="cart-item">
       <div className="item-container">
         <div className="item-select">
-          <input type="checkbox" />
+          <input
+            type="checkbox"
+            checked={isChecked}
+            onChange={toggleCheckbox}
+          />
         </div>
 
         <div className="item-main">

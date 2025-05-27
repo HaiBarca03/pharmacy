@@ -10,6 +10,7 @@ import {
   RightOutlined,
   SearchOutlined,
   ShoppingCartOutlined,
+  ShoppingOutlined,
   UserOutlined
 } from '@ant-design/icons'
 import './Header.css'
@@ -77,6 +78,16 @@ const Header = () => {
   const handleCart = () => {
     navigate('/cart')
   }
+  const handleOrder = () => {
+    navigate('/order')
+  }
+  const [keyword, setKeyword] = useState('')
+
+  const handleSearch = () => {
+    if (keyword.trim()) {
+      navigate(`/search/${encodeURIComponent(keyword.trim())}`)
+    }
+  }
   return (
     <div className="header-container">
       <Row align="middle" className="header-row">
@@ -93,6 +104,9 @@ const Header = () => {
             placeholder="Bạn đang tìm gì hôm nay..."
             prefix={<SearchOutlined />}
             className="search-bar"
+            value={keyword}
+            onChange={(e) => setKeyword(e.target.value)}
+            onPressEnter={handleSearch}
           />
         </Col>
         <Col span={6} className="header-actions">
@@ -102,6 +116,11 @@ const Header = () => {
               <Button
                 icon={<ShoppingCartOutlined />}
                 onClick={handleCart}
+                className="icon-button"
+              />
+              <Button
+                icon={<ShoppingOutlined />}
+                onClick={handleOrder}
                 className="icon-button"
               />
               {user ? (

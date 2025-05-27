@@ -6,12 +6,16 @@ const {
   updateProduct,
   deleteProduct,
   getProductsByCategoryId,
-  getProductById
+  getProductById,
+  searchProducts,
+  getProductsSortedByPrice
 } = require('../controllers/Product.controller')
 const { authorizeAdmin } = require('../middlewares/auth')
 
 router.post('/', authorizeAdmin, createProduct)
 router.get('/category/:categoryId', getProductsByCategoryId)
+router.get('/search', searchProducts)
+router.get('/get-by-price', getProductsSortedByPrice)
 router.get('/:id', getProductById)
 router.get('/', getAllProducts)
 router.put('/:id', authorizeAdmin, updateProduct)

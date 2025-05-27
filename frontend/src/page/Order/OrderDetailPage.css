@@ -1,0 +1,19 @@
+.order-detail-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.order-detail-card {
+  margin-top: 16px;
+}
+
+.order-status-tag {
+  font-size: 14px;
+  text-transform: uppercase;
+}
+
+.product-image {
+  height: 200px;
+  object-fit: cover;
+}

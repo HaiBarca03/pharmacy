@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Card, Image, InputNumber, Space, Typography } from 'antd'
 import './MedicationDetails.css'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { getDetailProducts } from '../../stores/Product/productApis'
 import { clearProductDetails } from '../../stores/Product/productSlice'
+import { createOrder } from '../../stores/Order/OrderApis'
+import { createCart } from '../../stores/Cart/CartApis'
 
 const { Title, Text } = Typography
 
@@ -12,6 +14,7 @@ const MedicationDetails = () => {
   const { id } = useParams()
   const medication = useSelector((state) => state.product.productDetails || {})
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const [quantity, setQuantity] = useState(1)
   const [mainImage, setMainImage] = useState(
     Array.isArray(medication.image_url) && medication.image_url.length > 0
@@ -39,6 +42,29 @@ const MedicationDetails = () => {
     setMainImage(imageUrl)
   }
 
+  const handleBuyNow = async (medication) => {
+    const orderData = {
+      items: [
+        {
+          product_id: medication.id,
+          quantity: quantity || 1,
+          price: medication.price * quantity
+        }
+      ]
+    }
+
+    await dispatch(createOrder(orderData))
+    navigate('/order')
+  }
+
+  const handleCartAddNow = async (medication) => {
+    const orderData = {
+      productId: medication.id,
+      quantity: quantity || 1
+    }
+    await dispatch(createCart(orderData))
+    navigate('/cart')
+  }
   return (
     <div className="medication-details-container">
       <Card className="medication-details-card" bordered={false}>
@@ -192,10 +218,19 @@ const MedicationDetails = () => {
 
             {/* Action Buttons */}
             <Space className="action-buttons">
-              <Button type="primary" size="large" className="buy-now-btn">
+              <Button
+                type="primary"
+                size="large"
+                className="buy-now-btn"
+                onClick={() => handleBuyNow(medication)}
+              >
                 Mua ngay
               </Button>
-              <Button size="large" className="add-to-cart-btn">
+              <Button
+                size="large"
+                className="add-to-cart-btn"
+                onClick={() => handleCartAddNow(medication)}
+              >
                 Thêm vào giỏ
               </Button>
             </Space>

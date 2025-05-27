@@ -22,12 +22,12 @@ module.exports = ({
   Article.belongsTo(User, { foreignKey: 'author_id' })
 
   // Order → OrderItems
-  Order.hasMany(OrderItem, { foreignKey: 'order_id' })
+  Order.hasMany(OrderItem, { foreignKey: 'order_id', as: 'items' })
   OrderItem.belongsTo(Order, { foreignKey: 'order_id' })
 
   // Product → OrderItems
   Product.hasMany(OrderItem, { foreignKey: 'product_id' })
-  OrderItem.belongsTo(Product, { foreignKey: 'product_id' })
+  OrderItem.belongsTo(Product, { foreignKey: 'product_id', as: 'product' })
 
   // Category → Products
   Category.hasMany(Product, { foreignKey: 'category_id' })

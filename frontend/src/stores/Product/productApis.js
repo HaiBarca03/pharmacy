@@ -9,7 +9,9 @@ import {
   getRequest,
   getSuccess,
   postDone,
-  updateSuccess
+  updateSuccess,
+  getSearch,
+  getSuccessPrice
 } from './productSlice'
 import { getAuthConfig } from '../authConfig'
 
@@ -27,6 +29,26 @@ export const getAllProducts =
         dispatch(getFailed(res.data.message))
       } else {
         dispatch(getSuccess(res.data))
+      }
+    } catch (error) {
+      dispatch(getError(error.message))
+    }
+  }
+
+export const getProductsByPrice =
+  (page = 1, limit = 12) =>
+  async (dispatch) => {
+    dispatch(getRequest())
+    try {
+      const config = getAuthConfig()
+      const res = await axios.get(
+        `/product/get-by-price?page=${page}&limit=${limit}`,
+        config
+      )
+      if (res.data.message) {
+        dispatch(getFailed(res.data.message))
+      } else {
+        dispatch(getSuccessPrice(res.data))
       }
     } catch (error) {
       dispatch(getError(error.message))
@@ -99,3 +121,23 @@ export const deleteProduct = (id) => async (dispatch) => {
     dispatch(getError(error.message))
   }
 }
+
+export const searchProducts =
+  (searchTerm, page = 1, limit = 12) =>
+  async (dispatch) => {
+    dispatch(getRequest())
+    try {
+      const config = getAuthConfig()
+      const res = await axios.get(
+        `/product/search?keyword=${searchTerm}&page=${page}&limit=${limit}`,
+        config
+      )
+      if (res.data.message) {
+        dispatch(getFailed(res.data.message))
+      } else {
+        dispatch(getSearch(res.data))
+      }
+    } catch (error) {
+      dispatch(getError(error.message))
+    }
+  }

@@ -5,8 +5,8 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { getDetailProducts } from '../../stores/Product/productApis'
 import { clearProductDetails } from '../../stores/Product/productSlice'
-import { createOrder } from '../../stores/Order/OrderApis'
 import { createCart } from '../../stores/Cart/CartApis'
+import { createOrder } from '../../stores/Order/OrderApis'
 
 const { Title, Text } = Typography
 

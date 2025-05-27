@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getDetailProducts } from '../../stores/Product/productApis'
 import { clearProductDetails } from '../../stores/Product/productSlice'
 import { createCart } from '../../stores/Cart/CartApis'
-import { createOrder } from '../../stores/Order/OrderApis'
+import { createOrder } from '../../stores/Order/orderApis'
 const { Title, Text } = Typography
 
 const MedicationDetails = () => {
